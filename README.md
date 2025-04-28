@@ -4,6 +4,10 @@
 
 ## 🚨Disclaimer: This is just for penetration testing, risk is borne by yourself
 
+| Tested on OS      |
+|-------------------|
+| Windows 10        |
+
 ### 🚀 **How to install**
 1. Clone this repo:
    ```bash
