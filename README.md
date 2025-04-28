@@ -19,7 +19,11 @@
    ```
    
    ```bash
-   cd DDoS && DDoS_Weak.py
+   cd DDoS
+   ```
+
+   ```bash
+   python DDoS_Weak.py
    ```
 
 ---
