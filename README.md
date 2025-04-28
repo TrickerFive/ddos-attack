@@ -15,6 +15,10 @@
    ```
 3. How to run it:
    ```bash
+   cd ddos-attack
+   ```
+   
+   ```bash
    cd DDoS && DDoS_Weak.py
    ```
 
